@@ -24,7 +24,7 @@ namespace InsuranceAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> GetItems()
         {
-            return await _context.Items.ToListAsync();
+            return await _context.Items.Where(w => !(w.IsDeleted ?? false)).ToListAsync();
         }
 
         // GET: api/Items/5
