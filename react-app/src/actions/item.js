@@ -33,7 +33,7 @@ export const deleteItem = (id, onSuccess) => dispatch => {
     api.item().delete(id)
     .then(res => {
         dispatch({
-            type: ACTION_TYPES.CREATE,
+            type: ACTION_TYPES.DELETE,
             payload: id
         })
         onSuccess()

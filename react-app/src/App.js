@@ -5,7 +5,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import { store } from "./actions/store";
 import { Provider } from "react-redux";
 import Items from './components/InsuranceItems';
-import ItemsForm from './components/InsuranceItemsForm';
 
 import { Card, Container } from 'react-bootstrap';
 
@@ -15,7 +14,6 @@ function App() {
       <Container>
         <Card className="m-2 p-2">
           <Items></Items>
-          <ItemsForm></ItemsForm>
         </Card>
       </Container>
     </Provider>

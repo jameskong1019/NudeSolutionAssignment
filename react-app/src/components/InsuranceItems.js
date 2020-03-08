@@ -1,13 +1,22 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import * as actions from "../actions/category";
+import * as itemActions from "../actions/item";
 import { Row, Col, Container} from "react-bootstrap";
+import ItemsForm from './InsuranceItemsForm';
 
 
 const Items = (props) => {
+
     useEffect(() => {
         props.fetchAllItems()
     },[])
+
+    const onDelete = id => {
+        if(window.confirm('Are you sure to delete this item?')) {
+            props.deleteItem(id, () => {console.log("Deleting item is success..")})
+        }
+    }
 
     return (
         <Container>
@@ -39,7 +48,7 @@ const Items = (props) => {
                                                     </Col>
                                                     <Col lg="6">
                                                         $ {item.value} 
-                                                        <a className="delete-item" href="#"><i className="fa fa-trash ml-2"></i></a>
+                                                        <a className="delete-item" onClick={() => onDelete(item.id)}><i className="fa fa-trash ml-2"></i></a>
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -62,6 +71,7 @@ const Items = (props) => {
                 }
                 </Col>
             </Row>
+            <ItemsForm></ItemsForm>
            </Container>
         );
 }
@@ -71,7 +81,8 @@ const mapStateToProps = state => ({
     })
 
 const mapActionToProps = {
-    fetchAllItems: actions.fetchAll
+    fetchAllItems: actions.fetchAll,
+    deleteItem: itemActions.deleteItem
 }
 
 export default connect(mapStateToProps, mapActionToProps)(Items);

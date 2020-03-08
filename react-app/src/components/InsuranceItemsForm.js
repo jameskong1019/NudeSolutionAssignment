@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import Select from 'react-select';
 import * as actions from "../actions/category";
@@ -10,7 +10,7 @@ import useForm from "./useForm";
 const initialFieldValues = {
     Name: '',
     Value: '',
-    CategoryId: 0
+    CategoryId: ''
 }
 
 const ItemsForm = (props) => {
@@ -21,7 +21,6 @@ const ItemsForm = (props) => {
 
     const { 
         values,
-        setValues,
         handleInputChange,
         handleSelectChange,
         resetForm
@@ -35,7 +34,6 @@ const ItemsForm = (props) => {
     }
 
     return ( 
-    <Container>
         <Form autoComplete="off" noValidate className="mt-2" onSubmit={handleSubmit}>
                 <Row>
                     <Col lg="3">
@@ -64,7 +62,6 @@ const ItemsForm = (props) => {
                     </Col>
                 </Row>
         </Form> 
-    </Container>
     );
 }
  
