@@ -24,7 +24,7 @@ namespace InsuranceAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Categories.Include(i => i.Items).ToListAsync();
+            return await _context.Categories.Include(i => i.Items).Where(w => w.Items.Any()).ToListAsync();
         }
 
         // GET: api/Categories/5

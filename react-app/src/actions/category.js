@@ -9,7 +9,6 @@ export const ACTION_TYPES = {
 export const fetchAll = () => dispatch => {
     api.category().fetchAll()
         .then(response => {
-            
             dispatch({
                 type: ACTION_TYPES.FETCH_ALL,
                 payload: response.data
