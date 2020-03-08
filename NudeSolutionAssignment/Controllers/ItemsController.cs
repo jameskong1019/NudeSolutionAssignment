@@ -31,7 +31,7 @@ namespace InsuranceAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetItem(int id)
         {
-            var item = await _context.Items.FindAsync(id);
+            var item = await _context.Items.Include(w => w.ItemCategory).Where(w => w.Id == id).FirstOrDefaultAsync();
 
             if (item == null)
             {

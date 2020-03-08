@@ -9,7 +9,7 @@ using InsuranceAPI.Models;
 
 namespace InsuranceAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -20,15 +20,25 @@ namespace InsuranceAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Categories
+        // GET: api/Categories/AllCategories
         [HttpGet]
+        [Route("[controller]/AllCategories")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Categories.Include(i => i.Items).Where(w => w.Items.Any()).ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
-        // GET: api/Categories/5
-        [HttpGet("{id}")]
+        // GET: api/Categories/CategoryItems
+        [HttpGet]
+        [Route("[controller]/CategoryItems")]
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesWithItems()
+        {
+            return await _context.Categories.Include(i => i.Items).ToListAsync();
+        }
+
+        // GET: api/Categories/Get/5
+        [HttpGet]
+        [Route("[controller]/Get/{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -41,10 +51,11 @@ namespace InsuranceAPI.Controllers
             return category;
         }
 
-        // PUT: api/Categories/5
+        // PUT: api/Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("[controller]/Edit/{id}")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
             if (id != category.Id)
@@ -77,6 +88,7 @@ namespace InsuranceAPI.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
+        [Route("[controller]")]
         public async Task<ActionResult<Category>> PostCategory(Category category)
         {
             _context.Categories.Add(category);
@@ -86,7 +98,7 @@ namespace InsuranceAPI.Controllers
         }
 
         // DELETE: api/Categories/5
-        [HttpDelete("{id}")]
+        [HttpDelete("[controller]/{id}")]
         public async Task<ActionResult<Category>> DeleteCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);

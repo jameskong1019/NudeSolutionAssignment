@@ -1,8 +1,7 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import * as actions from "../actions/category";
-import { Row, Col, Card, Button } from "react-bootstrap";
-import ItemsForm from "./InsuranceItemsForm";
+import { Row, Col, Container} from "react-bootstrap";
 
 
 const Items = (props) => {
@@ -11,14 +10,14 @@ const Items = (props) => {
     },[])
 
     return (
-        <Card className="mt-2 p-2">
-            <Row className="justify-content-md-center mt-3"> 
+        <Container>
+            <Row className="justify-content-md-center my-3"> 
                 <h4>
                     List of Items
                 </h4>
             </Row>
                 {
-                    props.itemList.map((category, index) => {
+                    props.itemList.filter(m => m.items.length > 0).map((category, index) => {
                         return (
                             <Row key={index}>
                                 <Col lg="6">
@@ -34,18 +33,16 @@ const Items = (props) => {
                                     category.items.map((item, itemIndex) => {
                                         return (
                                             <Col lg="12" key={index + "-" + itemIndex}>
-                                                <Row className="ml-2">
+                                                <Row className="ml-2 align-items-center my-1">
                                                     <Col lg="6" >
                                                         {item.name}
                                                     </Col>
                                                     <Col lg="6">
                                                         $ {item.value} 
-                                                        <Button className="ml-2"></Button>
+                                                        <a className="delete-item" href="#"><i className="fa fa-trash ml-2"></i></a>
                                                     </Col>
                                                 </Row>
                                             </Col>
-                                            
-
                                         )
                                     })
                                 }
@@ -53,24 +50,19 @@ const Items = (props) => {
                         )
                     })
                 }
-            <Row>
-                <Col>
-                Total:
-                    {
+            <Row className="my-2">
+                <Col className="mr-2 font-weight-bold">
+                <span className="mr-2">TOTAL</span> 
+                ${
                         props.itemList.reduce((total, category) => {
                             return total += category.items.reduce((sum, i) => (
                              sum += i.value
                             ), 0);
                         }, 0)
-                    }
+                }
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    <ItemsForm></ItemsForm>
-                </Col>
-            </Row>
-        </Card>
+           </Container>
         );
 }
  
