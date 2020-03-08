@@ -1,20 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import * as actions from "../actions/category";
 import * as itemActions from "../actions/item";
 import { Row, Col, Container} from "react-bootstrap";
 import ItemsForm from './InsuranceItemsForm';
-
+import { useToasts } from "react-toast-notifications";
 
 const Items = (props) => {
+
+    const { addToast } = useToasts()
 
     useEffect(() => {
         props.fetchAllItems()
     },[])
 
+    const onSuccess = () => { 
+        addToast("Item is deleted", {appearance: 'success'}) 
+    }
+
     const onDelete = id => {
         if(window.confirm('Are you sure to delete this item?')) {
-            props.deleteItem(id, () => {console.log("Deleting item is success..")})
+            props.deleteItem(id, onSuccess)
         }
     }
 
@@ -48,7 +54,7 @@ const Items = (props) => {
                                                     </Col>
                                                     <Col lg="6">
                                                         $ {item.value} 
-                                                        <a className="delete-item" onClick={() => onDelete(item.id)}><i className="fa fa-trash ml-2"></i></a>
+                                                        <a href="#" className="delete-item" onClick={() => onDelete(item.id)}><i className="fa fa-trash ml-2"></i></a>
                                                     </Col>
                                                 </Row>
                                             </Col>

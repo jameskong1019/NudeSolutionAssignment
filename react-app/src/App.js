@@ -7,15 +7,18 @@ import { Provider } from "react-redux";
 import Items from './components/InsuranceItems';
 
 import { Card, Container } from 'react-bootstrap';
+import { ToastProvider} from "react-toast-notifications"
 
 function App() {
   return (
     <Provider store = {store}>
-      <Container>
-        <Card className="m-2 p-2">
-          <Items></Items>
-        </Card>
-      </Container>
+      <ToastProvider autoDismiss={true}>
+        <Container>
+          <Card className="m-2 p-2">
+            <Items></Items>
+          </Card>
+        </Container>
+      </ToastProvider>
     </Provider>
   );
 }

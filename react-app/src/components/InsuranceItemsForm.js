@@ -4,8 +4,9 @@ import Select from 'react-select';
 import * as actions from "../actions/category";
 import * as itemActions from "../actions/item";
 
-import { Row, Form, Col, Container, Button } from "react-bootstrap";
+import { Row, Form, Col, Button } from "react-bootstrap";
 import useForm from "./useForm";
+import { useToasts } from "react-toast-notifications";
 
 const initialFieldValues = {
     Name: '',
@@ -14,6 +15,8 @@ const initialFieldValues = {
 }
 
 const ItemsForm = (props) => {
+
+    const { addToast } = useToasts()
 
     useEffect(() => {
         props.fetchCategories()
@@ -28,9 +31,17 @@ const ItemsForm = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.createItem(values, () => { console.log("success.. inserted item!")})
-        resetForm()
-        console.log(values);
+        const onSuccess = () => { 
+            addToast("Item is added", {appearance: 'success'}) 
+            resetForm()
+        }
+
+        if(values.Name === "" || values.Value === "" || values.CategoryId === "") {
+            addToast("Please enter all information for an item.", {appearance: 'error'})
+        } else {
+            props.createItem(values, onSuccess)
+        }
+
     }
 
     return ( 
@@ -53,7 +64,6 @@ const ItemsForm = (props) => {
                           name="CategoryId"
                           onChange={handleSelectChange}
                           value={props.categories.filter(category => category.id === values.CategoryId)}
-                          
                     >
                     </Select>
                     </Col>

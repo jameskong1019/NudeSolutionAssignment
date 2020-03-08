@@ -29,7 +29,7 @@ export const item = (state = initialState, action) => {
                 return {
                     ...state,
                     list: state.list.map((category) => {
-                        category.items = category.items.filter(i => i.id != action.payload);
+                        category.items = category.items.filter(i => i.id !== action.payload);
                         return category;
                     })
                 }
