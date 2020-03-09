@@ -18,6 +18,7 @@ const ItemsForm = (props) => {
 
     const { addToast } = useToasts()
 
+    //get categories for category dropdown
     useEffect(() => {
         props.fetchCategories()
     },[])

@@ -20,13 +20,6 @@ namespace InsuranceAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Items
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetItems()
-        {
-            return await _context.Items.Where(w => !(w.IsDeleted ?? false)).ToListAsync();
-        }
-
         // GET: api/Items/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetItem(int id)
@@ -41,41 +34,7 @@ namespace InsuranceAPI.Controllers
             return item;
         }
 
-        // PUT: api/Items/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, Item item)
-        {
-            if (id != item.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(item).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Items
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(Item item)
         {
@@ -99,11 +58,6 @@ namespace InsuranceAPI.Controllers
             await _context.SaveChangesAsync();
 
             return item;
-        }
-
-        private bool ItemExists(int id)
-        {
-            return _context.Items.Any(e => e.Id == id);
         }
     }
 }

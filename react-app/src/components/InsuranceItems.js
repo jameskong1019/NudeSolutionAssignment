@@ -26,7 +26,7 @@ const Items = (props) => {
 
     return (
         <Container>
-            <Row className="justify-content-md-center my-3"> 
+            <Row className="justify-content-md-center my-2"> 
                 <h4>
                     List of Items
                 </h4>
@@ -34,14 +34,14 @@ const Items = (props) => {
                 {
                     props.itemList.filter(m => m.items.length > 0).map((category, index) => {
                         return (
-                            <Row key={index}>
-                                <Col lg="6">
+                            <Row className="my-2" key={index}>
+                                <Col lg="3">
                                     {category.name}
                                 </Col>
-                                <Col lg="6">
+                                <Col lg="3">
                                     $ { category.items.reduce((sum, i) => (
                                         sum += i.value
-                                    ), 0)
+                                    ), 0).toLocaleString()
                                     }
                                 </Col>
                                 {
@@ -49,12 +49,12 @@ const Items = (props) => {
                                         return (
                                             <Col lg="12" key={index + "-" + itemIndex}>
                                                 <Row className="ml-2 align-items-center my-1">
-                                                    <Col lg="6" >
+                                                    <Col lg="3" >
                                                         {item.name}
                                                     </Col>
-                                                    <Col lg="6">
-                                                        $ {item.value} 
-                                                        <a href="#" className="delete-item" onClick={() => onDelete(item.id)}><i className="fa fa-trash ml-2"></i></a>
+                                                    <Col lg="3">
+                                                        ${item.value.toLocaleString()} 
+                                                        <a href="/#" className="delete-item" onClick={() => onDelete(item.id)}><i className="fa fa-trash ml-2"></i></a>
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -73,7 +73,7 @@ const Items = (props) => {
                             return total += category.items.reduce((sum, i) => (
                              sum += i.value
                             ), 0);
-                        }, 0)
+                        }, 0).toLocaleString()
                 }
                 </Col>
             </Row>
