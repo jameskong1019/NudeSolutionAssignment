@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InsuranceAPI.Models;
+using InsuranceAPI.Services;
+using InsuranceAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +32,9 @@ namespace NudeSolutionAssignment
                                                             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                                                         );
             services.AddDbContext<InsuranceDBcontext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IItemService, ItemService>();
 
             services.AddCors();
         }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InsuranceAPI.Models;
+using InsuranceAPI.Services.Interfaces;
 
 namespace InsuranceAPI.Controllers
 {
@@ -13,11 +14,11 @@ namespace InsuranceAPI.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly InsuranceDBcontext _context;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesController(InsuranceDBcontext context)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         // GET: api/Categories/AllCategories
@@ -25,15 +26,17 @@ namespace InsuranceAPI.Controllers
         [Route("AllCategories")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            var categories = await _categoryService.GetAll();
+            return Ok(categories);
         }
 
         // GET: api/Categories/CategoryItems
         [HttpGet]
         [Route("CategoryItems")]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesWithItems()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategoryItems()
         {
-            return await _context.Categories.Include(i => i.Items).ToListAsync();
+           var items = await _categoryService.GetCategoryItems();
+           return Ok(items);
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InsuranceAPI.Models;
+using InsuranceAPI.Services.Interfaces;
 
 namespace InsuranceAPI.Controllers
 {
@@ -14,17 +15,19 @@ namespace InsuranceAPI.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly InsuranceDBcontext _context;
+        private readonly IItemService _itemService;
 
-        public ItemsController(InsuranceDBcontext context)
+        public ItemsController(InsuranceDBcontext context, IItemService itemService)
         {
             _context = context;
+            _itemService = itemService;
         }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetItem(int id)
         {
-            var item = await _context.Items.FindAsync(id);
+            var item = await _itemService.GetById(id);
 
             if (item == null)
             {
@@ -38,8 +41,7 @@ namespace InsuranceAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(Item item)
         {
-            _context.Items.Add(item);
-            await _context.SaveChangesAsync();
+            await _itemService.Create(item);
 
             return CreatedAtAction("GetItem", new { id = item.Id }, item);
         }
@@ -48,15 +50,14 @@ namespace InsuranceAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Item>> DeleteItem(int id)
         {
-            var item = await _context.Items.FindAsync(id);
+
+            var item = await _itemService.GetById(id);
             if (item == null)
             {
                 return NotFound();
             }
 
-            _context.Items.Remove(item);
-            await _context.SaveChangesAsync();
-
+            await _itemService.Delete(item);
             return item;
         }
     }
