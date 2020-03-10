@@ -14,12 +14,10 @@ namespace InsuranceAPI.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly InsuranceDBcontext _context;
         private readonly IItemService _itemService;
 
-        public ItemsController(InsuranceDBcontext context, IItemService itemService)
+        public ItemsController(IItemService itemService)
         {
-            _context = context;
             _itemService = itemService;
         }
 
@@ -57,7 +55,8 @@ namespace InsuranceAPI.Controllers
                 return NotFound();
             }
 
-            await _itemService.Delete(item);
+            item.IsDeleted = true;
+            await _itemService.Update(item);
             return item;
         }
     }
