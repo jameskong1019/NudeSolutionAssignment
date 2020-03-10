@@ -8,6 +8,10 @@ namespace InsuranceAPI.Models
 {
     public class InsuranceDBcontext:DbContext
     {
+        public InsuranceDBcontext()
+        {
+        }
+
         public InsuranceDBcontext(DbContextOptions<InsuranceDBcontext> options) : base(options)
         {
 

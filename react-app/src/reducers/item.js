@@ -9,7 +9,10 @@ export const item = (state = initialState, action) => {
         case ACTION_TYPES.FETCH_ALL:
             return {
                 ...state,
-                list: [...action.payload]
+                list: action.payload.map((category) => {
+                    category.items = category.items.filter(i => !i.isDeleted)
+                    return category;
+                })
             }
 
             case ACTION_TYPES.CREATE:
@@ -29,7 +32,9 @@ export const item = (state = initialState, action) => {
                 return {
                     ...state,
                     list: state.list.map((category) => {
-                        category.items = category.items.filter(i => i.id !== action.payload);
+                        category.items = category.items.map(i => { 
+                            return i.id === action.payload ? {...i, isDeleted: true} : i
+                        }).filter(i => !i.isDeleted);
                         return category;
                     })
                 }
