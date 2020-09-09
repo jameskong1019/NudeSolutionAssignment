@@ -14,6 +14,7 @@
   1) Run npm install for installing dependencies
   2) Run npm start on vs code running on localhost:3000
 ```
+```bash
 ● src
 +---● actions
 |   |
@@ -37,3 +38,4 @@
 |-- App.js
 |-- index.js
 |-- index.css
+```
