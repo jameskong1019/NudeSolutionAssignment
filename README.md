@@ -2,7 +2,7 @@
 
 ## How to run
 ```bash
-1. Database - MSSQL LocalDB<br />
+1. Database - MSSQL LocalDB
 Please run insuranceDB.sql in API project to your localDB
 ```
 ```bash
