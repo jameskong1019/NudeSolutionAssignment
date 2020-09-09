@@ -13,7 +13,7 @@
 3. Front End (React) - React-app
   1) Run npm install for installing dependencies
   2) Run npm start on vs code running on localhost:3000
-
+```
 ● src
 +---● actions
 |   |
