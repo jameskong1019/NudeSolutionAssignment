@@ -1,13 +1,14 @@
 # NudeSolutionAssignment
 
 ## How to run
-
+1. Database - MSSQL LocalDB<br />
+Please run insuranceDB.sql in API project to your localDB
 ```bash
-1. Back End (.Net core Api) - NudeSolutionAssignment
+2. Back End (.Net core Api) - NudeSolutionAssignment
 Build and run on Visual studio
 ```
 ```bash
-2. Front End (React) - React-app
+3. Front End (React) - React-app
 npm start on vs code running on localhost:3000
 
 ● src
@@ -35,6 +36,3 @@ npm start on vs code running on localhost:3000
 |-- index.css
 ```
 ```bash
-3. Database - Azure server
-Don't need to do set up.
-```
