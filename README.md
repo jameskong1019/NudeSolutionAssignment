@@ -1,8 +1,10 @@
 # NudeSolutionAssignment
 
 ## How to run
+```bash
 1. Database - MSSQL LocalDB<br />
 Please run insuranceDB.sql in API project to your localDB
+```
 ```bash
 2. Back End (.Net core Api) - NudeSolutionAssignment
 Build and run on Visual studio
@@ -34,5 +36,3 @@ npm start on vs code running on localhost:3000
 |-- App.js
 |-- index.js
 |-- index.css
-```
-```bash
