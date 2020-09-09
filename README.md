@@ -3,7 +3,7 @@
 ## How to run
 ```bash
 1. Database - MSSQL LocalDB
-  1) Run insuranceDB.sql from API project to your localDB
+  1) Run insuranceDB.sql on API project to your localDB
 ```
 ```bash
 2. Back End (.Net core Api) - NudeSolutionAssignment
@@ -12,7 +12,7 @@
 ```bash
 3. Front End (React) - React-app
   1) Run npm install for installing dependencies
-  2) Run npm start on vs code running on localhost:3000
+  2) Run npm start on visual studio code or cmd running on localhost:3000
 ```
 ```bash
 ● src
