@@ -7,7 +7,7 @@
 ```
 ```bash
 2. Back End (.Net core Api) - NudeSolutionAssignment
-Build and run IISExpress server on Visual studio
+  1) Build and run IISExpress server on Visual studio
 ```
 ```bash
 3. Front End (React) - React-app
