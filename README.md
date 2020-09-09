@@ -11,7 +11,7 @@
 ```
 ```bash
 3. Front End (React) - React-app
-  1) Run npm install for installing dependencies
+  1) Run npm install to install dependencies
   2) Run npm start on visual studio code or cmd running on localhost:3000
 ```
 ```bash
