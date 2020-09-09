@@ -14,8 +14,8 @@
   1) Run npm install to install dependencies
   2) Run npm start on visual studio code or cmd running on localhost:3000
 ```
-```bash
 ## File structure for React with Redux
+```bash
 ● src
 +---● actions
 |   |
